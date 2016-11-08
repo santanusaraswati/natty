@@ -1,0 +1,115 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.natty'
+version = '0.13-SNAPSHOT'
+
+description = """Natty Date Parser"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    generated
+    main {
+        compileClasspath += sourceSets.generated.compileClasspath
+    }
+}
+
+compileJava{
+    source += sourceSets.generated.java
+}
+
+configurations {
+    antlr
+}
+
+task generateDateParser(type: JavaExec) {
+    description = 'Generates Java sources from Antlr3 grammars.'
+    ext {
+        grammarPackage = "com.natty.generated"
+        antlrSource = 'src/main/antlr3'
+        grammars = fileTree(antlrSource).include('**//*DateLexer.g').include('**//*DateParser.g')
+        destinationDir = sourceSets.generated.java.srcDirs.collect { sd -> new File(grammarPackage.replaceAll("\\.", "/"), sd) }.get(0)
+    }
+    inputs.dir file(ext.antlrSource)
+    outputs.dir file(destinationDir)
+    outputs.upToDateWhen { false }
+
+    main = 'org.antlr.Tool'
+    classpath = configurations.antlr
+    args = ["-o", "${destinationDir}", "-debug", grammars.files].flatten()
+}
+
+generateDateParser.doFirst {
+    mkdir(generateDateParser.destinationDir)
+}
+
+generateDateParser.doLast {
+    //copy {
+    //    from generateDateParser.destinationDir
+    //    include '*.tokens'
+    //    into sourceSets.generated.java.srcDirs.find()
+    //}
+
+    //def collection = files { generateDateParser.destinationDir.listFiles() }.filter { f -> f.getName().endsWith(".tokens")}
+    //delete collection
+    println "Done generating grammar..."
+}
+
+task generateDateWalker(type: JavaExec) {
+    description = 'Generates Java sources from Antlr3 grammars.'
+    ext {
+        grammarPackage = "com.natty.generated"
+        antlrSource = 'src/main/antlr3'
+        grammars = fileTree(antlrSource).include('**//*DateWalker.g').include('**//*TreeRewrite.g')
+        destinationDir = sourceSets.generated.java.srcDirs.collect { sd -> new File(grammarPackage.replaceAll("\\.", "/"), sd) }.get(0)
+    }
+    inputs.dir file(ext.antlrSource)
+    outputs.dir file(destinationDir)
+    outputs.upToDateWhen { false }
+
+    main = 'org.antlr.Tool'
+    classpath = configurations.antlr
+    args = ["-o", "${destinationDir}", grammars.files].flatten()
+}
+
+generateDateWalker.doFirst {
+    mkdir(generateDateWalker.destinationDir)
+}
+
+generateDateWalker.doLast {
+    copy {
+        from generateDateWalker.destinationDir
+        include '*.tokens'
+        into sourceSets.generated.java.srcDirs.find()
+    }
+
+    def collection = files { generateDateWalker.destinationDir.listFiles() }.filter { f -> f.getName().endsWith(".tokens")}
+    delete collection
+    println "Done generating grammar..."
+}
+
+task cleanGenerated (type: Delete) {
+    delete sourceSets.generated.java.srcDirs.collect { sd -> sd.listFiles() }
+}
+
+dependencies {
+    antlr "org.antlr:antlr:3.5.2"
+    generatedCompile group: 'org.antlr', name: 'antlr-runtime', version:'3.5.2'
+    generatedCompile group: 'org.mnode.ical4j', name: 'ical4j', version:'1.0.2'
+    generatedCompile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.10'
+    testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.10'
+    testCompile group: 'junit', name: 'junit', version:'4.1'
+    testCompile group: 'org.antlr', name: 'gunit', version:'3.5.2'
+}
+
+task srcSetNames << {
+    sourceSets.all {
+        ss -> println ss.java.srcDirs.collect {sd -> new File("com.natty.generated".replaceAll("\\.", "/"), sd)}.get(0)
+    }
+}

@@ -1,4 +1,4 @@
-package com.joestelmach.natty;
+package com.natty;
 
 import junit.framework.Assert;
 import org.apache.log4j.Level;

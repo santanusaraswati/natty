@@ -1,9 +1,9 @@
-package com.joestelmach.natty;
+package com.natty;
 
-import com.joestelmach.natty.generated.DateLexer;
-import com.joestelmach.natty.generated.DateParser;
-import com.joestelmach.natty.generated.DateWalker;
-import com.joestelmach.natty.generated.TreeRewrite;
+import com.natty.generated.DateLexer;
+import com.natty.generated.DateParser;
+import com.natty.generated.DateWalker;
+import com.natty.generated.TreeRewrite;
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;

@@ -37,12 +37,12 @@ tokens {
 }
 
 @header {
-  package com.joestelmach.natty.generated;
+  package com.natty.generated;
 }
 
 @members {
   private static org.slf4j.Logger _logger =
-    org.slf4j.LoggerFactory.getLogger(com.joestelmach.natty.generated.DateParser.class);
+    org.slf4j.LoggerFactory.getLogger(com.natty.generated.DateParser.class);
 
   @Override
   public void displayRecognitionError(String[] tokenNames, RecognitionException re) {

@@ -7,7 +7,7 @@ options {
   filter=true;
 }
 
-@header { package com.joestelmach.natty.generated; }
+@header { package com.natty.generated; }
 
 @members {
   @Override

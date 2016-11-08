@@ -1,4 +1,4 @@
-package com.joestelmach.natty;
+package com.natty;
 
 /**
  * Represents an invocation of a parse rule

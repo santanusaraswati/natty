@@ -1,8 +1,9 @@
-package com.joestelmach.natty.grammar;
+package com.natty.grammar;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Method;
 
+import com.natty.ANTLRNoCaseInputStream;
 import junit.framework.Assert;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -12,11 +13,10 @@ import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.antlr.runtime.tree.Tree;
 
-import com.joestelmach.natty.ANTLRNoCaseInputStream;
-import com.joestelmach.natty.ParseListener;
-import com.joestelmach.natty.generated.DateLexer;
-import com.joestelmach.natty.generated.DateParser;
-import com.joestelmach.natty.generated.TreeRewrite;
+import com.natty.ParseListener;
+import com.natty.generated.DateLexer;
+import com.natty.generated.DateParser;
+import com.natty.generated.TreeRewrite;
 
 public abstract class AbstractGrammarTest {
   protected String _ruleName;

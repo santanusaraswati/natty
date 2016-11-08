@@ -1,4 +1,4 @@
-package com.joestelmach.natty;
+package com.natty;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

@@ -1,10 +1,10 @@
 lexer grammar DateLexer;
 
-@header { package com.joestelmach.natty.generated; }
+@header { package com.natty.generated; }
 
 @members {
   private static org.slf4j.Logger _logger =
-    org.slf4j.LoggerFactory.getLogger(com.joestelmach.natty.generated.DateLexer.class);
+    org.slf4j.LoggerFactory.getLogger(com.natty.generated.DateLexer.class);
 
   @Override
   public void displayRecognitionError(String[] tokenNames, RecognitionException re) {

@@ -5,10 +5,10 @@ options {
   ASTLabelType=CommonTree;
 }
 
-@header { package com.joestelmach.natty.generated; }
+@header { package com.natty.generated; }
 
 @members {
-  private com.joestelmach.natty.WalkerState _walkerState;
+  private com.natty.WalkerState _walkerState;
   private java.util.Date referenceDate;
 
   @Override
@@ -27,9 +27,9 @@ options {
     this.referenceDate = referenceDate;
   }
 
-  public com.joestelmach.natty.WalkerState getState() {
+  public com.natty.WalkerState getState() {
     if(_walkerState==null) {
-      _walkerState = new com.joestelmach.natty.WalkerState(referenceDate);
+      _walkerState = new com.natty.WalkerState(referenceDate);
     }
     return _walkerState;
   }

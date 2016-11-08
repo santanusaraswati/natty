@@ -1,4 +1,4 @@
-package com.joestelmach.natty;
+package com.natty;
 
 import org.antlr.runtime.tree.Tree;
 

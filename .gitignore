@@ -1,11 +1,46 @@
-.classpath
-.settings
-.project
+# .gitignore for Gradle
+
+gradle*
+gradlew*
+
+# build local cache
+.gradle
+
+# possible build target directories
+/out
+/build
+/bin
+/buildSrc/out
+/buildSrc/build
+/subprojects/*/out
+/subprojects/*/build
+/subprojects/docs/src/samples/*/*/build
+/subprojects/*/bin
+/logs
+
+# ide specific exclusions, first idea then eclipse
 .idea
-workspace.xml
-bin
-target
-src/main/java/com/joestelmach/natty/generated/*
-src/main/java/*.tokens
-src/main/antlr3/com/joestelmach/natty/generated/DebugDateParser.g
-src/main/antlr3/com/joestelmach/natty/generated/DebugDateWalker.g
+/intellij
+/*.iml
+/*.ipr
+/*.iws
+/subprojects/*/*.iml
+/buildSrc/*.ipr
+/buildSrc/*.iws
+/buildSrc/*.iml
+*.classpath
+*.project
+*.settings
+
+# java compiled files
+*.class
+/src/generated
+
+# java package files
+*.war
+*.ear
+
+/.nb-gradle/profiles/private/
+.nb-gradle-properties
+.vertx
+
